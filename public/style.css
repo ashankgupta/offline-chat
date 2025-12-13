@@ -1,32 +1,29 @@
 :root {
-  /* Neon Space Theme - Dark Base */
-  --primary-strong: #0a001a; /* Deep space purple */
-  --primary-light: #1f0040; /* Slightly lighter purple */
-  --accent-green: #00ff85; /* Neon green for accents */
-  --accent-blue: #00b4ff; /* Neon blue for self messages */
-  --accent-pink: #ff00b4; /* Neon pink for other messages */
-  --background-gray: #0a001a; /* Dark space */
-  --background-chat: rgba(10, 0, 26, 0.7); /* Semi-transparent for glass */
-  --self-message-bg: linear-gradient(135deg, var(--accent-blue), #0083ff);
-  --other-message-bg: linear-gradient(135deg, var(--accent-pink), #b00083);
-  --text-primary: #ffffff; /* White text */
-  --text-secondary: #b3b3b3; /* Light gray */
-  --border-color: rgba(255, 255, 255, 0.1); /* Subtle border */
-  --selected-chat-bg: rgba(31, 0, 64, 0.8);
-  --sidebar-bg: rgba(10, 0, 26, 0.5); /* Glassy sidebar */
-  --sidebar-header-bg: rgba(10, 0, 26, 0.6);
-  --chat-hover-bg: rgba(31, 0, 64, 0.6);
-  --chat-selected-bg: rgba(31, 0, 64, 0.8);
-  --shadow-soft: rgba(0, 0, 0, 0.5); /* Dark shadow */
-  --glass-bg: rgba(255, 255, 255, 0.05);
-  --glass-blur: blur(20px);
-  --neon-glow: 0 0 15px;
+  /* Professional Light Theme - WhatsApp Inspired */
+  --primary-strong: #075e54; /* WhatsApp green */
+  --primary-light: #128c7e; /* Lighter green */
+  --accent-green: #25d366; /* WhatsApp green */
+  --accent-blue: #34b7f1; /* Blue for links */
+  --accent-pink: #e91e63; /* Pink for accents */
+  --background-gray: #f0f0f0; /* Light gray background */
+  --background-chat: #e5ddd5; /* WhatsApp chat background */
+  --self-message-bg: #dcf8c6; /* Light green for self */
+  --other-message-bg: #ffffff; /* White for others */
+  --text-primary: #000000; /* Black text */
+  --text-secondary: #666666; /* Gray text */
+  --border-color: #e0e0e0; /* Light border */
+  --selected-chat-bg: #e1f5fe; /* Light blue for selected */
+  --sidebar-bg: #ffffff; /* White sidebar */
+  --sidebar-header-bg: #f0f0f0; /* Light gray header */
+  --chat-hover-bg: #f5f5f5; /* Hover background */
+  --chat-selected-bg: #e1f5fe; /* Selected chat */
+  --shadow-soft: rgba(0, 0, 0, 0.1); /* Soft shadow */
+  --glass-bg: rgba(255, 255, 255, 0.9);
+  --glass-blur: blur(10px);
+  --neon-glow: none;
 }
 
-/* Optional Light Mode, but focus on dark neon */
-.dark-mode {
-  /* Same as root for consistency with image */
-}
+
 
 /* Global Styles */
 * {
@@ -40,9 +37,7 @@ body {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background: url("image.png");
-  background-size: cover;
-  background-position: center;
+  background: var(--background-gray);
   color: var(--text-primary);
   overflow: hidden;
 }
@@ -52,7 +47,7 @@ body {
 }
 /* Header */
 #app-header {
-  background: linear-gradient(135deg, var(--primary-strong), var(--primary-light));
+  background: var(--primary-strong);
   color: #fff;
   padding: 16px 24px;
   display: flex;
@@ -60,12 +55,9 @@ body {
   align-items: center;
   font-weight: 600;
   font-size: 20px;
-  box-shadow: var(--neon-glow) var(--primary-light);
+  box-shadow: 0 2px 4px var(--shadow-soft);
   position: relative;
   z-index: 100;
-  border-bottom-left-radius: 12px;
-  border-bottom-right-radius: 12px;
-  backdrop-filter: var(--glass-blur);
 }
 
 .header-title {
@@ -82,18 +74,17 @@ body {
 }
 
 .header-btn {
-  background: var(--glass-bg);
-  border: 1px solid var(--border-color);
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
   cursor: pointer;
   padding: 10px;
   border-radius: 12px;
   transition: all 0.3s ease;
-  backdrop-filter: var(--glass-blur);
 }
 
 .header-btn:hover {
-  box-shadow: var(--neon-glow) var(--accent-green);
-  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
 }
 
 .header-icon {
@@ -121,10 +112,9 @@ body {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  border-radius: 20px;
-  box-shadow: var(--neon-glow) var(--primary-light);
-  backdrop-filter: var(--glass-blur);
-  border: 1px solid var(--border-color);
+  border-radius: 0;
+  box-shadow: 2px 0 4px var(--shadow-soft);
+  border-right: 1px solid var(--border-color);
 }
 
 #chat-list h3 {
@@ -139,29 +129,7 @@ body {
   border-bottom: 1px solid var(--border-color);
 }
 
-/* Search Input */
-#searchInput {
-  width: calc(100% - 32px);
-  margin: 16px;
-  padding: 14px 20px;
-  border: 1px solid var(--border-color);
-  border-radius: 14px;
-  font-size: 15px;
-  outline: none;
-  background: var(--glass-bg);
-  color: var(--text-primary);
-  transition: all 0.3s ease;
-  backdrop-filter: var(--glass-blur);
-}
 
-#searchInput::placeholder {
-  color: var(--text-secondary);
-}
-
-#searchInput:focus {
-  border-color: var(--accent-green);
-  box-shadow: var(--neon-glow) var(--accent-green);
-}
 
 /* User List */
 #userList {
@@ -265,12 +233,8 @@ body {
   display: flex;
   flex-direction: column;
   background: var(--background-chat);
-  border-radius: 20px;
-  box-shadow: var(--neon-glow) var(--primary-light);
   position: relative;
   overflow: hidden;
-  backdrop-filter: var(--glass-blur);
-  border: 1px solid var(--border-color);
 }
 
 #chat-area .chat-content {
@@ -311,21 +275,22 @@ body {
   padding: 24px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  background: transparent;
+  gap: 8px;
+  background: var(--background-chat);
 }
 
 /* Message Bubbles */
 .message {
   max-width: 70%;
-  padding: 14px 20px;
-  border-radius: 20px;
+  padding: 8px 12px;
+  border-radius: 8px;
   word-wrap: break-word;
   position: relative;
   display: flex;
   flex-direction: column;
   animation: slideIn 0.4s ease forwards;
-  box-shadow: var(--neon-glow) rgba(255, 255, 255, 0.2);
+  box-shadow: 0 1px 2px var(--shadow-soft);
+  margin-bottom: 4px;
 }
 
 @keyframes slideIn {
@@ -342,15 +307,13 @@ body {
 .message.self {
   align-self: flex-end;
   background: var(--self-message-bg);
-  box-shadow: var(--neon-glow) var(--accent-blue);
-  border-bottom-right-radius: 6px;
+  border-bottom-right-radius: 4px;
 }
 
 .message.other {
   align-self: flex-start;
   background: var(--other-message-bg);
-  box-shadow: var(--neon-glow) var(--accent-pink);
-  border-bottom-left-radius: 6px;
+  border-bottom-left-radius: 4px;
 }
 
 .message-text {
@@ -373,12 +336,9 @@ body {
   text-align: left;
 }
 
-/* Status Ticks */
-.status-tick {
-  font-size: 14px;
-  margin-left: 4px;
-  vertical-align: middle;
-}
+
+
+
 
 .status-tick.sent::after {
   content: "✓";
@@ -400,11 +360,10 @@ body {
   display: flex;
   padding: 16px 20px;
   gap: 14px;
-  background: var(--glass-bg);
+  background: var(--sidebar-bg);
   align-items: center;
   border-top: 1px solid var(--border-color);
-  box-shadow: var(--neon-glow) var(--primary-light);
-  backdrop-filter: var(--glass-blur);
+  box-shadow: 0 -2px 4px var(--shadow-soft);
 }
 
 #your-name-container {
@@ -484,8 +443,14 @@ body {
   color: var(--text-primary);
 }
 
+.file-limit {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-left: 8px;
+}
+
 #send {
-  background: linear-gradient(135deg, var(--accent-green), var(--primary-light));
+  background: var(--accent-green);
   border: none;
   cursor: pointer;
   width: 48px;
@@ -493,14 +458,14 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 16px;
+  border-radius: 50%;
   transition: all 0.3s ease;
-  box-shadow: var(--neon-glow) var(--accent-green);
+  box-shadow: 0 2px 4px var(--shadow-soft);
 }
 
 #send:hover {
+  background: var(--primary-light);
   transform: scale(1.05);
-  box-shadow: var(--neon-glow) var(--accent-green);
 }
 
 /* Welcome Screen */
@@ -517,12 +482,11 @@ body {
 }
 
 .welcome-card {
-  background: var(--glass-bg);
+  background: var(--sidebar-bg);
   padding: 40px;
-  border-radius: 24px;
+  border-radius: 12px;
   max-width: 500px;
-  box-shadow: var(--neon-glow) var(--primary-light);
-  backdrop-filter: var(--glass-blur);
+  box-shadow: 0 4px 8px var(--shadow-soft);
   border: 1px solid var(--border-color);
 }
 
@@ -606,6 +570,27 @@ body {
 .modal-content button:hover {
   transform: translateY(-2px);
   box-shadow: var(--neon-glow) var(--accent-green);
+}
+
+/* Toast */
+#toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--primary-strong);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  box-shadow: 0 4px 8px var(--shadow-soft);
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+#toast.show {
+  opacity: 1;
 }
 
 /* Credits */
@@ -855,18 +840,20 @@ body {
     display: none;
   }
 
-  #userList li {
-    flex-shrink: 0;
-    border-radius: 12px;
-    width: 80px;
-    flex-direction: column;
-    text-align: center;
-    padding: 8px;
-    margin-bottom: 0;
-    margin-right: 4px;
-    background: var(--sidebar-bg);
-    border: 1px solid var(--border-color);
-  }
+   #userList li {
+     flex-shrink: 0;
+     border-radius: 12px;
+     width: 80px;
+     height: 80px;
+     flex-direction: column;
+     text-align: center;
+     padding: 8px;
+     margin-bottom: 0;
+     margin-right: 4px;
+     background: var(--sidebar-bg);
+     border: 1px solid var(--border-color);
+     justify-content: center;
+   }
 
   #userList li:hover {
     transform: none;
@@ -886,9 +873,10 @@ body {
     margin: 0 auto 4px;
   }
 
-  .chat-info {
-    align-items: center;
-  }
+   .chat-info {
+     align-items: center;
+     justify-content: center;
+   }
 
   .nameSpan {
     font-size: 11px;
@@ -981,44 +969,56 @@ body {
     font-size: 10px;
   }
 
-  #composer {
-    padding: 10px 12px;
-    gap: 8px;
-    border-radius: 0;
-  }
+   #composer {
+     padding: 10px 12px;
+     gap: 4px;
+     border-radius: 0;
+     align-items: center;
+   }
 
-  #your-name-container {
-    padding: 8px 12px;
-    border-radius: 10px;
-  }
+   #your-name-container {
+     display: none;
+   }
+
+   #text {
+     padding: 6px 12px;
+     font-size: 12px;
+     border-radius: 16px;
+     flex: 1;
+     min-width: 120px;
+     max-width: 60%;
+   }
 
   #name {
     font-size: 13px;
     min-width: 60px;
   }
 
-  #text {
-    padding: 6px 14px;
-    font-size: 13px;
-    border-radius: 20px;
-  }
+   #text {
+     padding: 8px 14px;
+     font-size: 13px;
+     border-radius: 20px;
+     flex: 1;
+   }
 
-  .emoji-btn, .file-btn {
-    padding: 1px;
-    border-radius: 10px;
-  }
+   .emoji-btn, .file-btn {
+     padding: 4px;
+     border-radius: 10px;
+     min-width: 32px;
+     min-height: 32px;
+   }
 
-  .emoji-icon, .file-icon {
-    width: 16px;
-    height: 16px;
-  }
+   .emoji-icon, .file-icon {
+     width: 16px;
+     height: 16px;
+   }
 
-  #send {
-    width: 18px;
-    height: 18px;
-    padding: 4px;
-    border-radius: 10px;
-  }
+   #send {
+     width: 36px;
+     height: 36px;
+     padding: 6px;
+     border-radius: 50%;
+   }
 
   .welcome-card {
     padding: 20px 16px;
@@ -1059,11 +1059,16 @@ body {
     border-radius: 10px;
   }
 
-  .modal-content button {
-    padding: 10px 24px;
-    font-size: 14px;
-    border-radius: 10px;
-  }
+   .modal-content button {
+     padding: 10px 24px;
+     font-size: 14px;
+     border-radius: 10px;
+   }
+
+   .file-limit {
+     font-size: 10px;
+     margin-left: 4px;
+   }
 
   #credits {
     padding: 12px;
@@ -1077,9 +1082,9 @@ body {
     padding: 8px 10px;
   }
 
-  .header-title {
-    font-size: 13px;
-  }
+   .header-title {
+     font-size: 12px;
+   }
 
   #userList li {
     width: 70px;
@@ -1110,10 +1115,17 @@ body {
     font-size: 13px;
   }
 
-  #messages {
-    padding: 10px;
-    gap: 6px;
-  }
+   #messages {
+     padding: 8px;
+     gap: 4px;
+   }
+
+   .message {
+     max-width: 95%;
+     padding: 6px 10px;
+     border-radius: 8px;
+     font-size: 12px;
+   }
 
   .message {
     padding: 8px 12px;
@@ -1125,44 +1137,39 @@ body {
     font-size: 13px;
   }
 
-  .timestamp {
-    font-size: 9px;
-  }
+   .timestamp {
+     font-size: 8px;
+   }
 
-  #composer {
-    padding: 8px 10px;
-    gap: 6px;
-  }
+   #composer {
+     padding: 8px 10px;
+     gap: 4px;
+   }
 
-  #your-name-container {
-    padding: 6px 10px;
-  }
+   #text {
+     padding: 6px 12px;
+     font-size: 12px;
+     border-radius: 16px;
+     min-width: 100px;
+     max-width: 50%;
+   }
 
-  #name {
-    font-size: 12px;
-    min-width: 50px;
-  }
+   .emoji-btn, .file-btn {
+     padding: 2px;
+     min-width: 28px;
+     min-height: 28px;
+   }
 
-  #text {
-    padding: 8px 14px;
-    font-size: 13px;
-    border-radius: 18px;
-  }
+   .emoji-icon, .file-icon {
+     width: 14px;
+     height: 14px;
+   }
 
-  .emoji-btn, .file-btn {
-    padding: 4px;
-  }
-
-  .emoji-icon, .file-icon {
-    width: 16px;
-    height: 16px;
-  }
-
-  #send {
-    width: 34px;
-    height: 34px;
-    padding: 6px;
-  }
+   #send {
+     width: 32px;
+     height: 32px;
+     padding: 4px;
+   }
 
   .welcome-card {
     padding: 16px 12px;

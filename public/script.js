@@ -58,7 +58,6 @@ const chatAreaEl = document.getElementById("chat-area");
 const welcomeScreenEl = document.getElementById("welcome-screen");
 const chatContentEl = chatAreaEl.querySelector(".chat-content");
 const chatHeaderEl = document.getElementById("chat-header");
-const themeToggle = document.getElementById("themeToggle");
 
 const emojiBtn = document.getElementById("emojiBtn");
 const emojiPicker = document.getElementById("emojiPicker");
@@ -75,24 +74,12 @@ emojiPicker.addEventListener("emoji-click", event => {
   emojiPicker.style.display = "none"; // auto close
 });
 
-
-if (localStorage.getItem("theme") === "dark") {
-  document.body.classList.add("dark-mode");
-  themeToggle.textContent = "☀️";
-}
-
-themeToggle.addEventListener("click", () => {
-  document.body.classList.toggle("dark-mode");
-  const isDark = document.body.classList.contains("dark-mode");
-  localStorage.setItem("theme", isDark ? "dark" : "light");
-  themeToggle.textContent = isDark ? "☀️" : "🌙";
-});
-
 // State
 let selectedUser = null;
 const chatCache = {};
 const unreadCount = {};
 const typingUsers = {};
+const messagesMap = {};
 
 
 // Append a message to UI
@@ -102,6 +89,8 @@ function appendMessage(msg) {
     "message",
     msg.from === socket.id ? "self" : "other"
   );
+  messageContainer.dataset.msgId = msg.id;
+  messagesMap[msg.id] = msg;
 
   if (msg.file) {
     // File message
@@ -111,7 +100,7 @@ function appendMessage(msg) {
     fileLink.textContent = `📄 ${msg.fromName}: ${msg.file.name}`;
     fileLink.target = "_blank";
     messageContainer.appendChild(fileLink);
-  } 
+  }
   else {
     // Text message
     const textDiv = document.createElement("div");
@@ -125,17 +114,32 @@ function appendMessage(msg) {
   timeDiv.textContent = new Date(msg.ts).toLocaleTimeString([], {
     hour: "2-digit",
     minute: "2-digit",
-  });
+  }).replace(":", ".");
+
   messageContainer.appendChild(timeDiv);
 
   messagesEl.appendChild(messageContainer);
   messagesEl.scrollTop = messagesEl.scrollHeight;
 }
 
+// Toast notification
+function showToast(message) {
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+  toast.style.display = "block";
+  toast.classList.add("show");
+  setTimeout(() => {
+    toast.classList.remove("show");
+    setTimeout(() => {
+      toast.style.display = "none";
+    }, 300);
+  }, 3000);
+}
+
 // Send text message
 function sendMessage() {
   if (!selectedUser) {
-    alert("Please select a user to chat with!");
+    showToast("Please select a user to chat with!");
     return;
   }
   const text = textEl.value.trim();
@@ -177,11 +181,17 @@ fileBtn.onclick = () => fileInput.click();
 
 fileInput.onchange = async () => {
   if (!selectedUser) {
-    alert("Select a user first!");
+    showToast("Select a user first!");
     return;
   }
   const file = fileInput.files[0];
   if (!file) return;
+
+  const maxSize = 10 * 1024 * 1024; // 10MB
+  if (file.size > maxSize) {
+    showToast("File size exceeds 10MB limit.");
+    return;
+  }
 
   const formData = new FormData();
   formData.append('file', file);
@@ -205,10 +215,10 @@ fileInput.onchange = async () => {
     chatCache[selectedUser].push(msg);
 
     socket.emit("private.file", { to: selectedUser, file: msg.file });
-  } catch (error) {
-    console.error('File upload failed:', error);
-    alert('File upload failed. Please try again.');
-  }
+   } catch (error) {
+     console.error('File upload failed:', error);
+     showToast('File upload failed. Please try again.');
+   }
 };
 
 // Render user list
@@ -273,13 +283,13 @@ function renderUserList(users = null) {
         <span class="nameSpan">${name}</span>
       `;
 
-      messagesEl.innerHTML = "";
-      if (chatCache[selectedUser]) {
-        chatCache[selectedUser].forEach(appendMessage);
-      } else {
-        socket.emit("getHistory", selectedUser);
-      }
-      renderUserList();
+       messagesEl.innerHTML = "";
+       if (chatCache[selectedUser]) {
+         chatCache[selectedUser].forEach(appendMessage);
+       } else {
+         socket.emit("getHistory", selectedUser);
+       }
+       renderUserList();
     };
 
     userListEl.appendChild(li);
@@ -291,6 +301,7 @@ socket.on("userList", (users) => renderUserList(users));
 
 socket.on("private.message", (msg) => {
   if (msg.from === socket.id) return;
+  messagesMap[msg.id] = msg;
   const otherId = msg.from;
   if (!chatCache[otherId]) chatCache[otherId] = [];
   chatCache[otherId].push(msg);
@@ -305,6 +316,7 @@ socket.on("private.message", (msg) => {
 
 socket.on("private.file", (msg) => {
   if (msg.from === socket.id) return;
+  messagesMap[msg.id] = msg;
   const otherId = msg.from;
   if (!chatCache[otherId]) chatCache[otherId] = [];
   chatCache[otherId].push(msg);
@@ -319,6 +331,7 @@ socket.on("private.file", (msg) => {
 
 socket.on("chatHistory", ({ with: userId, messages }) => {
   chatCache[userId] = messages;
+  messages.forEach(m => messagesMap[m.id] = m);
   if (selectedUser === userId) {
     messagesEl.innerHTML = "";
     messages.forEach(appendMessage);

@@ -10,41 +10,27 @@
 <body>
 <div id="app-header">
   <div class="header-title">💬 Offline College Chat</div>
-  <div class="header-actions">
-    <button id="changeNameBtn" class="header-btn" title="Change Name">
-      <svg xmlns="http://www.w3.org/2000/svg" 
-           viewBox="0 0 24 24" 
-           fill="none" 
-           stroke="currentColor" 
-           stroke-width="2" 
-           stroke-linecap="round" 
-           stroke-linejoin="round" 
-           class="header-icon">
-        <path d="M12 20h9" />
-        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
-      </svg>
-    </button>
-    <button id="themeToggle" class="header-btn" title="Toggle Theme">
-      <svg xmlns="http://www.w3.org/2000/svg" 
-           viewBox="0 0 24 24" 
-           fill="none" 
-           stroke="currentColor" 
-           stroke-width="2" 
-           stroke-linecap="round" 
-           stroke-linejoin="round" 
-           class="header-icon">
-        <path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z" />
-      </svg>
-    </button>
-
-  </div>
+   <div class="header-actions">
+     <button id="changeNameBtn" class="header-btn" title="Change Name">
+       <svg xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="header-icon">
+         <path d="M12 20h9" />
+         <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+       </svg>
+     </button>
+   </div>
 </div>
 
 <div id="container">
-  <div id="chat-list">
-    <h3>Chats</h3>
-    <input type="text" id="searchInput" placeholder="Search chats..." />
-      <ul id="userList">
+   <div id="chat-list">
+     <h3>Chats</h3>
+       <ul id="userList">
         <li class="selected">
           <div class="avatar-placeholder">A</div>
           <div class="chat-info">
@@ -77,46 +63,48 @@
     <div class="chat-content">
       <div id="chat-header"></div>
       <div id="messages"></div>
-      <div id="composer">
-        <div id="your-name-container">
-          <input id="name" placeholder="Your name" disabled />
-        </div>
-        <input id="text" placeholder="Type a message..." />
-        <button id="emojiBtn" class="emoji-btn" aria-label="Emoji Picker">
-          <svg xmlns="http://www.w3.org/2000/svg" 
-               viewBox="0 0 24 24" 
-               fill="none" 
-               stroke="currentColor" 
-               stroke-width="2" 
-               stroke-linecap="round" 
-               stroke-linejoin="round" 
-               class="emoji-icon">
-            <circle cx="12" cy="12" r="10"></circle>
-            <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
-            <line x1="9" y1="9" x2="9.01" y2="9"></line>
-            <line x1="15" y1="9" x2="15.01" y2="9"></line>
-          </svg>
-        </button>
+       <div id="composer">
+         <div id="your-name-container">
+           <input id="name" placeholder="Your name" disabled />
+         </div>
+         <input id="text" placeholder="Type a message..." />
+         <button id="emojiBtn" class="emoji-btn" aria-label="Emoji Picker">
+           <svg xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="emoji-icon">
+             <circle cx="12" cy="12" r="10"></circle>
+             <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+             <line x1="9" y1="9" x2="9.01" y2="9"></line>
+             <line x1="15" y1="9" x2="15.01" y2="9"></line>
+           </svg>
+         </button>
 
-          <!-- Emoji Picker -->
-          <emoji-picker id="emojiPicker" style="display:none; position:absolute; bottom:60px; right:60px;"></emoji-picker>
+           <!-- Emoji Picker -->
+           <emoji-picker id="emojiPicker" style="display:none; position:absolute; bottom:60px; right:60px;"></emoji-picker>
 
-          <!-- File upload -->
-          <input type="file" id="fileInput" style="display:none" />
-          <button id="fileBtn" class="file-btn" aria-label="Attach File">
-            <svg xmlns="http://www.w3.org/2000/svg" 
-                 viewBox="0 0 24 24" 
-                 fill="none" 
-                 stroke="currentColor" 
-                 stroke-width="2" 
-                 stroke-linecap="round" 
-                 stroke-linejoin="round" 
-                 class="file-icon">
-              <path d="M21.44 11.05l-9.19 9.19a5 5 0 0 1-7.07-7.07l9.19-9.19a3.5 3.5 0 0 1 4.95 4.95l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path>
-            </svg>
-          </button>
+           <!-- File upload -->
+           <input type="file" id="fileInput" style="display:none" />
+           <button id="fileBtn" class="file-btn" aria-label="Attach File">
+             <svg xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="file-icon">
+               <path d="M21.44 11.05l-9.19 9.19a5 5 0 0 1-7.07-7.07l9.19-9.19a3.5 3.5 0 0 1 4.95 4.95l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path>
+             </svg>
+           </button>
 
-        <button id="send">
+         <div class="file-limit">Max file size: 10MB</div>
+
+         <button id="send">
           <svg viewBox="0 0 24 24" height="24" width="24" fill="white">
             <path d="M1.1 21.8 23.8 12 1.1 2.3l.01 7.9 13.6 1.8-13.6 1.8-.01 7.9z"></path>
           </svg>
@@ -134,9 +122,11 @@
   </div>
 </div>
 
-<div id="credits" style="text-align:center; padding:10px; font-size:12px; color:#888;">
-  Developed by Ashank Gupta 💻 | <a href="https://github.com/Ashank007" target="_blank">GitHub</a>
-</div>
+ <div id="toast" style="display:none;"></div>
+
+ <div id="credits" style="text-align:center; padding:10px; font-size:12px; color:#888;">
+   Developed by Ashank Gupta 💻 | <a href="https://github.com/ashankgupta" target="_blank">GitHub</a>
+ </div>
 
 <script src="/socket.io/socket.io.js"></script>
 <script src="script.js"></script>

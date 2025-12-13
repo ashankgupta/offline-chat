@@ -69,7 +69,7 @@ let users = {};
 let chatHistory = {};
 
 function getChatKey(id1, id2) {
-  return [id1, id2].sort().join("_");
+  return [id1, id2].sort().join("###");
 }
 
 function getLocalIP() {
@@ -126,13 +126,7 @@ io.on("connection", (socket) => {
     socket.emit("private.file", msg);
   });
 
-  socket.on("message.delivered", ({ msgId, from }) => {
-    io.to(from).emit("message.status", { msgId, status: "delivered" });
-  });
 
-  socket.on("message.read", ({ msgId, from }) => {
-    io.to(from).emit("message.status", { msgId, status: "read" });
-  });
 
   socket.on("getHistory", (otherId) => {
     const key = getChatKey(socket.id, otherId);
