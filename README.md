@@ -1,3 +1,11 @@
+<p align="center" style="white-space: nowrap; display: inline-block;">
+  <img src="https://img.shields.io/badge/Docker-Ready-blue?style=for-the-badge&logo=docker&logoColor=white" />
+  <img src="https://img.shields.io/badge/Node.js-%3E=14-green?style=for-the-badge&logo=nodedotjs&logoColor=white" />
+  <img src="https://img.shields.io/badge/Socket.IO-Real--time-black?style=for-the-badge&logo=socketdotio&logoColor=white" />
+  <img src="https://img.shields.io/badge/Offline-LAN%20Chat-success?style=for-the-badge&logo=wifi&logoColor=white" />
+  <img src="https://img.shields.io/badge/License-MIT-lightgrey?style=for-the-badge" />
+</p>
+
 # Offline Chat
 
 A WhatsApp-style offline peer-to-peer chat application with a professional responsive UI that works over local network using Socket.IO.
